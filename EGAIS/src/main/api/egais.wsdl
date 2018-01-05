@@ -1,0 +1,287 @@
+<definitions xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:egwsdl="http://api.lesuser.lesegais.ru/wsdl" xmlns:api="http://api.lesuser.lesegais.ru/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://api.lesuser.lesegais.ru/wsdl">
+<types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:egwsdl="http://api.lesuser.lesegais.ru/wsdl" xmlns:api="http://api.lesuser.lesegais.ru/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<xs:import namespace="http://api.lesuser.lesegais.ru/" schemaLocation="http://testintegration.taskdata.work:80/portal-api/integration/lesuser?xsd=lesuser-api.xsd"/>
+</xs:schema>
+</types>
+<message name="GetContractUnderlyingDocumentsResponse">
+<part element="api:ResponseGetContractUnderlyingDocuments" name="response"></part>
+</message>
+<message name="DeleteDocumentResponse">
+<part element="api:ResponseDeleteDocument" name="response"></part>
+</message>
+<message name="LesUserRequestHeader">
+<part element="api:LesUserRequestHeader" name="common"></part>
+</message>
+<message name="GetLookupValuesResponse">
+<part element="api:ResponseGetLookupValues" name="response"></part>
+</message>
+<message name="GetDocumentResponse">
+<part element="api:ResponseGetDocument" name="response"></part>
+</message>
+<message name="LesUserFault">
+<part element="api:LesUserFault" name="fault"></part>
+</message>
+<message name="GetContractUnderlyingDocumentsRequest">
+<part element="api:RequestGetContractUnderlyingDocuments" name="request"></part>
+</message>
+<message name="InsertDocumentRequest">
+<part element="api:RequestInsertDocument" name="request"></part>
+</message>
+<message name="DeleteDocumentRequest">
+<part element="api:RequestDeleteDocument" name="request"></part>
+</message>
+<message name="UpdateDocumentResponse">
+<part element="api:ResponseUpdateDocument" name="response"></part>
+</message>
+<message name="GetLookupValuesRequest">
+<part element="api:RequestGetLookupValues" name="request"></part>
+</message>
+<message name="GetModifiedDocumentsRequest">
+<part element="api:RequestGetModifiedDocuments" name="request"></part>
+</message>
+<message name="InsertPartyRequest">
+<part element="api:RequestInsertParty" name="request"></part>
+</message>
+<message name="GetPartyRequest">
+<part element="api:RequestGetParty" name="request"></part>
+</message>
+<message name="GetModifiedDocumentsResponse">
+<part element="api:ResponseGetModifiedDocuments" name="response"></part>
+</message>
+<message name="GetPartyValuesRequest">
+<part element="api:RequestGetPartyValues" name="request"></part>
+</message>
+<message name="GetDocumentRequest">
+<part element="api:RequestGetDocument" name="request"></part>
+</message>
+<message name="InsertPartyResponse">
+<part element="api:ResponseInsertParty" name="response"></part>
+</message>
+<message name="GetPartyValuesResponse">
+<part element="api:ResponseGetPartyValues" name="response"></part>
+</message>
+<message name="InsertDocumentResponse">
+<part element="api:ResponseInsertDocument" name="response"></part>
+</message>
+<message name="UpdateDocumentRequest">
+<part element="api:RequestUpdateDocument" name="request"></part>
+</message>
+<message name="GetPartyResponse">
+<part element="api:ResponseGetParty" name="response"></part>
+</message>
+<portType name="LesUserServicePortType">
+<operation name="GetLookupValues">
+<documentation>Получение данных справочника</documentation>
+<input message="egwsdl:GetLookupValuesRequest"></input>
+<output message="egwsdl:GetLookupValuesResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="GetPartyValues">
+<documentation>Получение данных справочника Лесопользователей</documentation>
+<input message="egwsdl:GetPartyValuesRequest"></input>
+<output message="egwsdl:GetPartyValuesResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="InsertParty">
+<documentation>Добавление записи в справочник Лесопользователей</documentation>
+<input message="egwsdl:InsertPartyRequest"></input>
+<output message="egwsdl:InsertPartyResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="GetParty">
+<documentation>Получение данных Лесопользователя</documentation>
+<input message="egwsdl:GetPartyRequest"></input>
+<output message="egwsdl:GetPartyResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="GetContractUnderlyingDocuments">
+<documentation>Получение данных справочника</documentation>
+<input message="egwsdl:GetContractUnderlyingDocumentsRequest"></input>
+<output message="egwsdl:GetContractUnderlyingDocumentsResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="GetDocument">
+<documentation>Получение данных документа</documentation>
+<input message="egwsdl:GetDocumentRequest"></input>
+<output message="egwsdl:GetDocumentResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="InsertDocument">
+<documentation>Добавление документа</documentation>
+<input message="egwsdl:InsertDocumentRequest"></input>
+<output message="egwsdl:InsertDocumentResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="UpdateDocument">
+<documentation>Обновление документа</documentation>
+<input message="egwsdl:UpdateDocumentRequest"></input>
+<output message="egwsdl:UpdateDocumentResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="DeleteDocument">
+<documentation>Удаление документа</documentation>
+<input message="egwsdl:DeleteDocumentRequest"></input>
+<output message="egwsdl:DeleteDocumentResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+<operation name="GetModifiedDocuments">
+<documentation>
+Получение созданных или измененых документов с указанной даты
+</documentation>
+<input message="egwsdl:GetModifiedDocumentsRequest"></input>
+<output message="egwsdl:GetModifiedDocumentsResponse"></output>
+<fault message="egwsdl:LesUserFault" name="fault"></fault>
+</operation>
+</portType>
+<binding name="LesUserServiceBinding" type="egwsdl:LesUserServicePortType">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="GetLookupValues">
+<documentation>Получение данных справочника документов-оснований</documentation>
+<soap:operation soapAction="egwsdl:GetLookupValues"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="GetPartyValues">
+<documentation>Получение данных справочника Лесопользователей</documentation>
+<soap:operation soapAction="egwsdl:GetPartyValues"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="InsertParty">
+<documentation>Добавление записи в справочник Лесопользователей</documentation>
+<soap:operation soapAction="egwsdl:InsertParty"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="GetParty">
+<documentation>Получение данных Лесопользователя</documentation>
+<soap:operation soapAction="egwsdl:GetParty"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="GetContractUnderlyingDocuments">
+<documentation>Получение данных справочника документов-оснований</documentation>
+<soap:operation soapAction="egwsdl:GetContractUnderlyingDocuments"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="GetDocument">
+<documentation>Получение данных документа</documentation>
+<soap:operation soapAction="egwsdl:GetDocument"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="InsertDocument">
+<documentation>Добавление документа</documentation>
+<soap:operation soapAction="egwsdl:InsertDocument"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="UpdateDocument">
+<documentation>Обновление документа</documentation>
+<soap:operation soapAction="egwsdl:UpdateDocument"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="DeleteDocument">
+<documentation>Удаление документа</documentation>
+<soap:operation soapAction="egwsdl:DeleteDocument"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+<operation name="GetModifiedDocuments">
+<documentation>
+Получение созданных или измененых документов с указанной даты
+</documentation>
+<soap:operation soapAction="egwsdl:GetModifiedDocuments"/>
+<input>
+<soap:header message="egwsdl:LesUserRequestHeader" part="common" use="literal"></soap:header>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="fault">
+<soap:fault name="fault" use="literal"/>
+</fault>
+</operation>
+</binding>
+<service name="LesUserService">
+<port binding="egwsdl:LesUserServiceBinding" name="LesUserServicePort">
+<soap:address location="http://testintegration.taskdata.work:80/portal-api/integration/lesuser"/>
+</port>
+</service>
+</definitions>

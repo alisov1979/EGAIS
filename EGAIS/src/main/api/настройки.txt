@@ -1,0 +1,58 @@
+—≈–¬»—€ ¡¿« 1—:
+spbWSDL 	 = http://10.10.254.80/ut_2010_exchange/ws/Exchange.1cws
+utcWSDL 	 = http://10.10.254.80/utc_2010_exchange/ws/Exchange.1cws
+mskWSDL 	 = http://10.10.254.80/ut_msk_exchange/ws/Exchange.1cws
+regWSDL 	 = http://10.10.254.80/ut_reg_exchange/ws/exchange.1cws
+esnWSDL 	 = http://10.10.254.80/esn_exchange/ws/Exchange.1cws
+unionWSDL  	 = http://10.10.254.80/ut_union_exchange/ws/Exchange.1cws
+siltaWSDL	 = http://10.10.254.80/ut_silta_exchange/ws/Exchange.1cws
+metalWSDL    	 = http://10.10.254.80/ut_metal_exchange/ws/Exchange.1cws
+uuWSDL 		 = http://10.10.254.80/uu_2010_exchange/ws/Exchange.1cws
+
+—≈–¬»—€ —¿…“¿:
+siteWSDL         = http://ws.stdp.ru/petExchange?Srvr=MULE_01
+siteTestWSDL     = http://ws.dev.local/petExchange?IS_DEV=1
+testWSDL	 = http://10.10.254.80/ut_2010_copy17/ws/Exchange.1cws
+shopWSDL	 = http://petrovichstd.ru/ws_orders.php
+
+Ì‡ÒÚÓÈÍË:
+=========================
+Ã— :
+ut_get  = ut.msk.get
+ut_set  = ut.msk.set
+service = http://10.10.254.80/ut_msk_exchange/ws/Exchange.1cws
+topiÒ   = ut.topic.get.response
+Ã—  zabbix::
+ut_get  = ut.msk.get.zabbix
+=========================
+—«‘Œ:
+ut_get = ut.reg.get	
+ut_set = ut.reg.set
+service = http://10.10.254.80/ut_reg_exchange/ws/Exchange.1cws
+—«‘Œ zabbix::
+ut_get  = ut.reg.get.zabbix
+=========================
+—œ¡:
+ut_get  = ut.spb.get
+ut_set  = ut.spb.set
+service = http://10.10.254.80/ut_2010_exchange/ws/Exchange.1cws
+topiÒ   = ut.topic.get.response	
+—œ¡ zabbix:
+ut_get  = ut.spb.get.zabbix
+—œ¡ ‚Á‡ËÏÓ‡Ò˜ÂÚ˚:
+ut_get	= ut.spb.get.mutual.settelments
+—œ¡ ÓÒÚ‡ÚÍË:
+ut_get	= ut.spb.get.product.balance
+==========================
+≈—Õ:
+ut_get	= ut.esn.get
+ut_set	= ut.esn.set
+service = http://10.10.254.80/esn_exchange/ws/Exchange.1cws
+topiÒ   = ut.topic.get.response	
+==========================
+”“ ﬁÕ»ŒÕ:
+ut_get  = ut.uni.get
+ut_set  = ut.uni.set
+service = http://10.10.254.80/ut_union_exchange/ws/Exchange.1cws
+topiÒ   = ut.topic.get.response	
+==========================

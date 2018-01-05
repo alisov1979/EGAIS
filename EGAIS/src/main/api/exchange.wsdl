@@ -1,0 +1,501 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://exchange.mule.ptr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://exchange.mule.ptr/" name="mule_Exchange" targetNamespace="http://exchange.mule.ptr/">
+<types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xs1="http://exchange.mule.ptr/" targetNamespace="http://exchange.mule.ptr/" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<xs:complexType name="complextype">
+<xs:complexContent>
+<xs:extension base="tns:simpletype">
+<xs:sequence>
+<xs:element name="recipients" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="item">
+<xs:complexContent>
+<xs:extension base="tns:complextype">
+<xs:sequence>
+<xs:element name="row" type="tns:row" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="object">
+<xs:complexContent>
+<xs:extension base="tns:complextype">
+<xs:sequence>
+<xs:element name="item" type="tns:item" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="hashKey" type="xs:string" nillable="true" minOccurs="0"/>
+</xs:sequence>
+<xs:attribute name="reply" type="xs:string"/>
+<xs:attribute name="sender" type="xs:string" use="required"/>
+<xs:attribute name="time" type="xs:string"/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="property">
+<xs:complexContent>
+<xs:extension base="tns:simpletype">
+<xs:sequence>
+<xs:element name="file" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+<xs:element name="sfields" type="tns:property" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="adds" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+<xs:attribute name="name" type="xs:string" use="required"/>
+<xs:attribute name="value" type="xs:string"/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="row">
+<xs:sequence>
+<xs:element name="property" type="tns:property" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="simpletype">
+<xs:attribute name="type" type="xs:string"/>
+</xs:complexType>
+<xs:element name="GetObject">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="object" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="GetObjectResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SetObject">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="object" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SetObjectResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="GetPrintForms">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="object" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="GetPrintFormsResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ShipOrder">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="object" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ShipOrderResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="GetQueueSize">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="planOfExchange" type="tns:row"/>
+<xs:element name="unitOfExchange" type="tns:row"/>
+<xs:element name="metaType" type="tns:row"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="GetQueueSizeResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="CloseOrder">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="order" type="tns:row"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="CloseOrderResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:row"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ModifyOrder">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="object" type="tns:row"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ModifyOrderResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="CreateCertificateOrder">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="order" type="tns:property"/>
+<xs:element name="object" type="tns:row"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="CreateCertificateOrderResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ConfirmOrder">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="order" type="tns:property"/>
+<xs:element name="row" type="tns:row"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ConfirmOrderResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:object"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="CreatePaymentDocument">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="item" type="tns:item"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="CreatePaymentDocumentResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+</types>
+<message name="GetObjectRequestMessage">
+<part name="parameters" element="tns:GetObject"/>
+</message>
+<message name="GetObjectResponseMessage">
+<part name="parameters" element="tns:GetObjectResponse"/>
+</message>
+<message name="SetObjectRequestMessage">
+<part name="parameters" element="tns:SetObject"/>
+</message>
+<message name="SetObjectResponseMessage">
+<part name="parameters" element="tns:SetObjectResponse"/>
+</message>
+<message name="GetPrintFormsRequestMessage">
+<part name="parameters" element="tns:GetPrintForms"/>
+</message>
+<message name="GetPrintFormsResponseMessage">
+<part name="parameters" element="tns:GetPrintFormsResponse"/>
+</message>
+<message name="ShipOrderRequestMessage">
+<part name="parameters" element="tns:ShipOrder"/>
+</message>
+<message name="ShipOrderResponseMessage">
+<part name="parameters" element="tns:ShipOrderResponse"/>
+</message>
+<message name="GetQueueSizeRequestMessage">
+<part name="parameters" element="tns:GetQueueSize"/>
+</message>
+<message name="GetQueueSizeResponseMessage">
+<part name="parameters" element="tns:GetQueueSizeResponse"/>
+</message>
+<message name="CloseOrderRequestMessage">
+<part name="parameters" element="tns:CloseOrder"/>
+</message>
+<message name="CloseOrderResponseMessage">
+<part name="parameters" element="tns:CloseOrderResponse"/>
+</message>
+<message name="ModifyOrderRequestMessage">
+<part name="parameters" element="tns:ModifyOrder"/>
+</message>
+<message name="ModifyOrderResponseMessage">
+<part name="parameters" element="tns:ModifyOrderResponse"/>
+</message>
+<message name="CreateCertificateOrderRequestMessage">
+<part name="parameters" element="tns:CreateCertificateOrder"/>
+</message>
+<message name="CreateCertificateOrderResponseMessage">
+<part name="parameters" element="tns:CreateCertificateOrderResponse"/>
+</message>
+<message name="ConfirmOrderRequestMessage">
+<part name="parameters" element="tns:ConfirmOrder"/>
+</message>
+<message name="ConfirmOrderResponseMessage">
+<part name="parameters" element="tns:ConfirmOrderResponse"/>
+</message>
+<message name="CreatePaymentDocumentRequestMessage">
+<part name="parameters" element="tns:CreatePaymentDocument"/>
+</message>
+<message name="CreatePaymentDocumentResponseMessage">
+<part name="parameters" element="tns:CreatePaymentDocumentResponse"/>
+</message>
+<portType name="mule_ExchangePortType">
+<operation name="GetObject">
+<input message="tns:GetObjectRequestMessage"/>
+<output message="tns:GetObjectResponseMessage"/>
+</operation>
+<operation name="SetObject">
+<input message="tns:SetObjectRequestMessage"/>
+<output message="tns:SetObjectResponseMessage"/>
+</operation>
+<operation name="GetPrintForms">
+<input message="tns:GetPrintFormsRequestMessage"/>
+<output message="tns:GetPrintFormsResponseMessage"/>
+</operation>
+<operation name="ShipOrder">
+<input message="tns:ShipOrderRequestMessage"/>
+<output message="tns:ShipOrderResponseMessage"/>
+</operation>
+<operation name="GetQueueSize">
+<input message="tns:GetQueueSizeRequestMessage"/>
+<output message="tns:GetQueueSizeResponseMessage"/>
+</operation>
+<operation name="CloseOrder">
+<input message="tns:CloseOrderRequestMessage"/>
+<output message="tns:CloseOrderResponseMessage"/>
+</operation>
+<operation name="ModifyOrder">
+<input message="tns:ModifyOrderRequestMessage"/>
+<output message="tns:ModifyOrderResponseMessage"/>
+</operation>
+<operation name="CreateCertificateOrder">
+<input message="tns:CreateCertificateOrderRequestMessage"/>
+<output message="tns:CreateCertificateOrderResponseMessage"/>
+</operation>
+<operation name="ConfirmOrder">
+<input message="tns:ConfirmOrderRequestMessage"/>
+<output message="tns:ConfirmOrderResponseMessage"/>
+</operation>
+<operation name="CreatePaymentDocument">
+<input message="tns:CreatePaymentDocumentRequestMessage"/>
+<output message="tns:CreatePaymentDocumentResponseMessage"/>
+</operation>
+</portType>
+<binding name="mule_ExchangeSoapBinding" type="tns:mule_ExchangePortType">
+<soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="GetObject">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:GetObject"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="SetObject">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:SetObject"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="GetPrintForms">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:GetPrintForms"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="ShipOrder">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:ShipOrder"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="GetQueueSize">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:GetQueueSize"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="CloseOrder">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:CloseOrder"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="ModifyOrder">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:ModifyOrder"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="CreateCertificateOrder">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:CreateCertificateOrder"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="ConfirmOrder">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:ConfirmOrder"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+<operation name="CreatePaymentDocument">
+<soapbind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:CreatePaymentDocument"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+</binding>
+<binding name="mule_ExchangeSoap12Binding" type="tns:mule_ExchangePortType">
+<soap12bind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="GetObject">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:GetObject"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="SetObject">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:SetObject"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="GetPrintForms">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:GetPrintForms"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="ShipOrder">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:ShipOrder"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="GetQueueSize">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:GetQueueSize"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="CloseOrder">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:CloseOrder"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="ModifyOrder">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:ModifyOrder"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="CreateCertificateOrder">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:CreateCertificateOrder"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="ConfirmOrder">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:ConfirmOrder"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+<operation name="CreatePaymentDocument">
+<soap12bind:operation style="document" soapAction="http://exchange.mule.ptr/#mule_Exchange:CreatePaymentDocument"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="mule_Exchange">
+<port name="mule_ExchangeSoap" binding="tns:mule_ExchangeSoapBinding">
+<documentation>
+<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+</documentation>
+<soapbind:address location="http://10.10.254.80/ut_2010_copy17/ws/Exchange.1cws"/>
+</port>
+<port name="mule_ExchangeSoap12" binding="tns:mule_ExchangeSoap12Binding">
+<soap12bind:address location="http://10.10.254.80/ut_2010_copy17/ws/Exchange.1cws"/>
+</port>
+</service>
+</definitions>

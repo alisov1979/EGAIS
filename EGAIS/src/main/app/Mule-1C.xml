@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:ws="http://www.mulesoft.org/schema/mule/ws"
+	xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+    <http:request-config name="mule.exchange" doc:name="HTTP Request Configuration"  responseTimeout="240000" connectionIdleTimeout="240000">
+        <http:basic-authentication username="ws" password="ws" preemptive="true"/>
+    </http:request-config>
+    <smtp:connector name="SMTP" contentType="text/plain" fromAddress="it_task@stdp.ru" validateConnections="true" doc:name="SMTP" />
+    <ws:consumer-config name="ut.ws" wsdlLocation="exchange.wsdl" service="mule_Exchange" port="mule_ExchangeSoap" serviceAddress="${service}" connectorConfig="mule.exchange" doc:name="Web Service Consumer"/>
+    <mulexml:jaxb-context name="ptr.mule.exchange" packageNames="ptr.mule.exchange:api.lesuser.lesegais.ru" doc:name="JAXB Context"/>
+    <jms:activemq-connector name="NEW-CLUSTER-MQ" brokerURL="tcp://10.13.252.97:61616" validateConnections="true" maxRedelivery="-1" numberOfConsumers="1" persistentDelivery="true" doc:name="Active MQ">
+        <reconnect-forever/>
+    </jms:activemq-connector>
+    <http:request-config name="egais.config" responseTimeout="30000" doc:name="HTTP Request Configuration">
+        <http:basic-authentication username="u_7802348846_001" password="!Q@W#E$R5t" preemptive="true"/>
+    </http:request-config>
+    <ws:consumer-config name="ws.egais" service="LesUserService" port="LesUserServicePort" serviceAddress="http://testintegration.taskdata.work:80/portal-api/integration/lesuser" connectorConfig="egais.config" wsdlLocation="eg.wsdl" doc:name="Web Service Consumer"/>
+   <spring:beans>
+        <spring:bean id="callWSLesUserService" name="Bean" class="ptr.mule.egais.CallWSLesUserService" scope="singleton" init-method="init"/>
+        <spring:bean id="timeFilter" name="FilterBean" class="ptr.mule.egais.TimeFilter" scope="singleton" init-method="init"/>
+        <spring:bean id="sendMessageToJMS" name="sendMessageToJMS" class="ptr.mule.egais.SendMessageToJMS" scope="singleton" init-method="init" destroy-method="closeConnection"/>       
+    </spring:beans>
+
+
+    <flow name="1C-SET" >
+        <jms:inbound-endpoint exchange-pattern="request-response" queue="${ut_set}" connector-ref="NEW-CLUSTER-MQ" doc:name="ut.set"/>
+        <mulexml:jaxb-xml-to-object-transformer returnClass="ptr.mule.exchange.iExchangable" jaxbContext-ref="ptr.mule.exchange" doc:name="XML to JAXB Object"/>
+        <custom-transformer class="ptr.mule.egais.Transformer" doc:name="Java"/>
+        <set-payload value="#[1==1]" doc:name="Set Payload"/>
+       
+    </flow>
+    <flow name="Mule-1CFlow">
+        <jms:inbound-endpoint queue="egais.email" connector-ref="NEW-CLUSTER-MQ" doc:name="JMS" exchange-pattern="request-response"/>
+        <smtp:outbound-endpoint host="127.0.0.1" to="alisov1979@gmail.com" from="it_task@petrovich.ru" responseTimeout="10000" doc:name="SMTP" subject="&#1054;&#1096;&#1080;&#1073;&#1082;&#1072; &#1086;&#1073;&#1084;&#1077;&#1085;&#1072; &#1076;&#1072;&#1085;&#1085;&#1099;&#1084;&#1080; DocsVision-&gt;1&#1057;." connector-ref="SMTP"/>
+        <set-payload value="#[1==1]" doc:name="Set Payload"/>
+    </flow>
+ 	
+ 	
+
+</mule>
