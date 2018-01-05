@@ -83,7 +83,7 @@ public class Transformer extends AbstractMessageTransformer {
 			return map.getString("—сылка");
 		}
 				
-		return null;
+		return null; 
 	}
 	
 	private boolean isIndividaul() 
